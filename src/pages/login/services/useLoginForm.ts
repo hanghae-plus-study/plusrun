@@ -42,7 +42,7 @@ const useLoginForm = () => {
     setServerError(null);
 
     const { error, data } = await supabase.auth.signInWithPassword({
-      email: formData.password,
+      email: formData.email,
       password: formData.password,
     });
 
