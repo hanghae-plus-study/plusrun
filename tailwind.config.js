@@ -13,6 +13,7 @@ module.exports = {
       silver: "#ecebff",
       red: "#b91c1c",
       bermuda: "#78dcca",
+      "gray-300": "rgb(206, 212, 218)",
     },
   },
   plugins: [],
