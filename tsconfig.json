@@ -20,10 +20,13 @@
     "alwaysStrict": true, //자바스크립트 "use strict" 모드 켜기
     "allowSyntheticDefaultImports": true,
 
-    "noUnusedLocals": true, //쓰지않는 지역변수 있으면 에러내기
-    "noUnusedParameters": true, //쓰지않는 파라미터 있으면 에러내기
     "noImplicitReturns": true, //함수에서 return 빼먹으면 에러내기
-    "noFallthroughCasesInSwitch": true //switch문 이상하면 에러내기
+    "noFallthroughCasesInSwitch": true, //switch문 이상하면 에러내기
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": ["src/**/*", "src/types/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
