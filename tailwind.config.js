@@ -16,6 +16,7 @@ module.exports = {
       blue: "#1b6ef3",
       gray: "#d9d9d9",
       softGray: "#f6f6f6",
+      "gray-300": "rgb(206, 212, 218)",
     },
   },
   plugins: [],
