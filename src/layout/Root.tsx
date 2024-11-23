@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { GNB } from "../pages/homes/GNB/GNB";
+import { GNB } from "../components/GNB/GNB";
 
 function Root() {
   return (
