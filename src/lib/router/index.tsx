@@ -1,13 +1,24 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { SignupPage, LoginPage, HomePage } from "./lazyPages";
+import {
+  SignupPage,
+  LoginPage,
+  HomePage,
+  CoursePage,
+  CommunityPage,
+  RootPage,
+} from "./lazyPages";
 import ROUTE_PATH from "./routPath";
 
 const router = createBrowserRouter([
   {
     path: ROUTE_PATH.ROOT,
-    element: <HomePage />,
-    children: [],
+    element: <RootPage />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/course", element: <CoursePage /> },
+      { path: "/community", element: <CommunityPage /> },
+    ],
   },
   {
     path: ROUTE_PATH.LOGIN,
