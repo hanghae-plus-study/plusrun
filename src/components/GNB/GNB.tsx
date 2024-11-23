@@ -1,6 +1,6 @@
 import logo from "../../assets/logo.svg";
 import Button from "../button/button";
-import SearchBar from "../../pages/homes/Components/SearchBar";
+import SearchBar from "../../pages/home/Components/SearchBar";
 import { NavLink, useNavigate } from "react-router-dom";
 
 export const MENU = [
