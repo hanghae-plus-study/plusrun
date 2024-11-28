@@ -24,7 +24,7 @@ function SignupPage() {
       <div>
         <button
           type="submit"
-          className="flex w-full justify-center rounded-md bg-red  py-3.5 text-base/6 font-extrabold text-white shadow-sm hover:bg-purple focus-visible:outline  focus-visible:outline-purple"
+          className="flex w-full justify-center rounded-md bg-red  py-3.5 text-base/6 font-extrabold text-white shadow-sm hover:bg-red-800 focus-visible:outline  "
         >
           회원가입
         </button>

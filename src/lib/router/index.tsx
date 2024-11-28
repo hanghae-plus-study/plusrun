@@ -1,14 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import {
-  SignupPage,
-  LoginPage,
-  HomePage,
-  CoursePage,
-  CommunityPage,
-  RootPage,
-} from "./lazyPages";
+import { SignupPage, LoginPage, HomePage, CoursePage, CommunityPage, RootPage } from "./lazyPages";
 import ROUTE_PATH from "./routPath";
+import { Suspense } from "react";
 
 const router = createBrowserRouter([
   {
@@ -22,11 +16,19 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.LOGIN,
-    element: <LoginPage />,
+    element: (
+      <Suspense>
+        <LoginPage />
+      </Suspense>
+    ),
   },
   {
     path: ROUTE_PATH.SIGNUP,
-    element: <SignupPage />,
+    element: (
+      <Suspense>
+        <SignupPage />
+      </Suspense>
+    ),
   },
 ]);
 

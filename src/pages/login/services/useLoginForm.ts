@@ -1,7 +1,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import supabase from "../../../lib/supabase";
 import { useState } from "react";
-// import supabase from "../../../lib/supabase";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { AuthError } from "@supabase/supabase-js";
 
 type LoginFormInputs = {
   email: string;
@@ -9,6 +11,8 @@ type LoginFormInputs = {
 };
 
 const useLoginForm = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -35,22 +39,28 @@ const useLoginForm = () => {
       },
     },
   };
-  // 검증 규칙 설정
 
-  // 폼 제출 핸들러
   const onSubmit: SubmitHandler<LoginFormInputs> = async (formData) => {
-    setServerError(null);
+    try {
+      setServerError(null);
 
-    const { error, data } = await supabase.auth.signInWithPassword({
-      email: formData.email,
-      password: formData.password,
-    });
+      const { error, data } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
 
-    if (error) {
-      setServerError(error.message);
-    }
-    if (data) {
-      //TODO: navigate to main
+      if (error) {
+        setServerError(error.message);
+      }
+      if (data.session) {
+        navigate("/");
+      }
+    } catch (error) {
+      if (error instanceof AuthError) {
+        setServerError(error.message);
+        return;
+      }
+      toast("오류가 발생했습니다.");
     }
   };
 
