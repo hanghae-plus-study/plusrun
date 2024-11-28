@@ -1,13 +1,13 @@
 import { RouterProvider } from "react-router-dom";
 import "./App.css";
 import router from "./lib/router";
+import Providers from "./store/Providers";
 
 function App() {
   return (
-    <div>
-      <h1 className="bg-red text-white text-3xl font-bold underline">Plus run</h1>
+    <Providers>
       <RouterProvider router={router} />
-    </div>
+    </Providers>
   );
 }
 
