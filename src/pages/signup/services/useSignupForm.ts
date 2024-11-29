@@ -63,6 +63,11 @@ const useSignupForm = () => {
       const { error, data } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
+        options: {
+          data: {
+            first_name: formData.name,
+          },
+        },
       });
 
       if (error) {
