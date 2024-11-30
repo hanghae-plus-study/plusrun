@@ -1,6 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import supabase from "../../../lib/supabase";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import supabase from "../../../lib/supabase";
 
 type LoginFormInputs = {
@@ -15,6 +16,7 @@ const useLoginForm = () => {
     formState: { errors },
   } = useForm<LoginFormInputs>();
   const [serverError, setServerError] = useState<string | null>(null);
+  const navigate = useNavigate();
   const validationRules = {
     email: {
       required: "이메일을 입력해주세요.",
@@ -50,7 +52,7 @@ const useLoginForm = () => {
       setServerError(error.message);
     }
     if (data) {
-      //TODO: navigate to main
+      navigate("/");
     }
   };
 
