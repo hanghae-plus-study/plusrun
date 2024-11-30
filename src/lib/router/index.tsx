@@ -7,6 +7,7 @@ import {
   CoursePage,
   CommunityPage,
   RootPage,
+  CourseDetailPage,
 } from "./lazyPages";
 import ROUTE_PATH from "./routPath";
 
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/course", element: <CoursePage /> },
       { path: "/community", element: <CommunityPage /> },
+      { path: "/courses/:id", element: <CourseDetailPage /> },
     ],
   },
   {
