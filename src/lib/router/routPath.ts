@@ -4,6 +4,7 @@ const ROUTE_PATH = {
   SIGNUP: "/signup",
   COURSE: "/course",
   COMMUNITY: "/community",
+  COMMUNITY_POSTING: "/community/posting",
 } as const;
 
 export default ROUTE_PATH;
