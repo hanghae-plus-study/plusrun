@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import supabase from "../../../lib/supabase";
+import { toast } from "react-toastify";
+import { AuthError } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
 
 type SignupFormInputs = {
   email: string;
@@ -17,6 +20,7 @@ const useSignupForm = () => {
     formState: { errors },
   } = useForm<SignupFormInputs>();
   const [serverError, setServerError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const passwordValue = watch("password");
 
@@ -53,18 +57,31 @@ const useSignupForm = () => {
   };
 
   const onSubmit: SubmitHandler<SignupFormInputs> = async (formData) => {
-    setServerError(null);
+    try {
+      setServerError(null);
 
-    const { error, data } = await supabase.auth.signUp({
-      email: formData.email,
-      password: formData.password,
-    });
+      const { error, data } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            first_name: formData.name,
+          },
+        },
+      });
 
-    if (error) {
-      setServerError(error?.message);
-    }
-    if (data) {
-      //TODO: navigate to main
+      if (error) {
+        setServerError(error?.message);
+      }
+      if (data.session) {
+        navigate("/");
+      }
+    } catch (error) {
+      if (error instanceof AuthError) {
+        setServerError(error.message);
+        return;
+      }
+      toast("오류가 발생했습니다.");
     }
   };
 
