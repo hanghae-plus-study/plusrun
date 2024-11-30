@@ -1,17 +1,30 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { SignupPage, LoginPage, HomePage, CoursePage, CommunityPage, RootPage } from "./lazyPages";
+import {
+  SignupPage,
+  LoginPage,
+  HomePage,
+  CoursePage,
+  CommunityPage,
+  RootPage,
+  CommunityPostingPage,
+} from "./lazyPages";
 import ROUTE_PATH from "./routPath";
 import { Suspense } from "react";
 
 const router = createBrowserRouter([
   {
     path: ROUTE_PATH.ROOT,
-    element: <RootPage />,
+    element: (
+      <Suspense>
+        <RootPage />
+      </Suspense>
+    ),
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/course", element: <CoursePage /> },
-      { path: "/community", element: <CommunityPage /> },
+      { path: ROUTE_PATH.COMMUNITY, element: <CommunityPage /> },
+      { path: ROUTE_PATH.COMMUNITY_POSTING, element: <CommunityPostingPage /> },
     ],
   },
   {
