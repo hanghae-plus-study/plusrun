@@ -5,10 +5,21 @@ import useLoginForm from "./services/useLoginForm";
 
 function LoginPage() {
   const navigation = useNavigate();
-  const { handleSubmit, register, onSubmit, formError, validationRules, error } = useLoginForm();
+  const {
+    handleSubmit,
+    register,
+    onSubmit,
+    formError,
+    validationRules,
+    error,
+  } = useLoginForm();
   return (
     <AuthForm onSubmit={handleSubmit(onSubmit)} title="로그인">
-      <Input {...register("email", validationRules.email)} label="이메일" error={formError.email?.message} />
+      <Input
+        {...register("email", validationRules.email)}
+        label="이메일"
+        error={formError.email?.message}
+      />
       <Input
         {...register("password", validationRules.password)}
         type="password"
@@ -30,7 +41,9 @@ function LoginPage() {
           회원가입
         </button>
       </div>
-      {!!error && <span className="text-sm/6 font-medium text-red">{error}</span>}
+      {!!error && (
+        <span className="text-sm/6 font-medium text-red">{error}</span>
+      )}
     </AuthForm>
   );
 }
