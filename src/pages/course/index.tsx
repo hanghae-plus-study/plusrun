@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "../../lib/supabase";
 import { CourseType } from "./types/course";
-import { CourseCard } from "./Components/CourseCard";
+import { CourseCard } from "../../components/CourseCard";
 import fetchCourses from "./services/fetchCourses";
 import { Link } from "react-router-dom";
 
@@ -55,7 +55,7 @@ const CoursePage: React.FC = () => {
             {courses.map((course: CourseType) => (
               <Link
                 to={`/courses/${course.id}`}
-                className="p-4 border rounded shadow-sm hover:shadow-lg"
+                className="rounded shadow-sm hover:shadow-lg"
               >
                 <CourseCard key={course.id} course={course} />
               </Link>
