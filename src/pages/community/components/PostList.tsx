@@ -1,5 +1,5 @@
 import apiClient from "src/services/apiClient";
-import { Posts } from "@/src/types/posts";
+import { Posts } from "src/types/posts";
 import React, { useEffect, useState } from "react";
 import PostItem from "./PostItem";
 
@@ -11,7 +11,9 @@ function PostList() {
 
   async function getCountries() {
     try {
-      const response = await apiClient.get<Posts>("/community_posts?select=*,member:members(user_name)");
+      const response = await apiClient.get<Posts>(
+        "/community_posts?select=*,member:members(user_name)"
+      );
       setPosts(response);
     } catch (error) {
       setPosts([]);

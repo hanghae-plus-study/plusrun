@@ -1,7 +1,7 @@
 import { CourseType } from "../../pages/course/types/course";
 
 export const CourseCard: React.FC<{ course: CourseType }> = ({ course }) => (
-  <div className="p-4 rounded shadow-sm hover:shadow-lg h-full ">
+  <div className="w-64 p-4 rounded shadow-sm hover:shadow-lg h-full ">
     {course.thumbnail && (
       <img
         src={course.thumbnail}
