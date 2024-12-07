@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthError } from "@supabase/supabase-js";
+import { useAuthStore } from "../../../store/useAuthStore";
 
 type LoginFormInputs = {
   email: string;
@@ -18,6 +19,7 @@ const useLoginForm = () => {
   } = useForm<LoginFormInputs>();
   const [serverError, setServerError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { setUserEmail, setUserName } = useAuthStore();
   const validationRules = {
     email: {
       required: "이메일을 입력해주세요.",
@@ -51,6 +53,23 @@ const useLoginForm = () => {
       if (error) {
         setServerError(error.message);
       }
+      const user = data.user;
+
+      if (user) {
+        const { data: userInfo, error: userInfoError } =
+          await supabase.auth.getUser();
+
+        if (userInfoError || !userInfo.user) {
+          throw new Error("사용자 정보를 가져오는 데 실패했습니다.");
+        }
+
+        if (user?.user_metadata) {
+          setUserName(user.user_metadata.first_name);
+        }
+        const { email } = userInfo.user;
+        setUserEmail(email!);
+      }
+
       if (data.session) {
         navigate("/");
       }

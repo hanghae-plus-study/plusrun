@@ -3,12 +3,27 @@ import AuthForm from "../login/components/Form";
 import useSignupForm from "./services/useSignupForm";
 
 function SignupPage() {
-  const { handleSubmit, register, onSubmit, formErros, validationRules, error } = useSignupForm();
+  const {
+    handleSubmit,
+    register,
+    onSubmit,
+    formErros,
+    validationRules,
+    error,
+  } = useSignupForm();
 
   return (
     <AuthForm onSubmit={handleSubmit(onSubmit)} title="회원가입">
-      <Input {...register("name", validationRules.name)} label="이름" error={formErros.name?.message} />
-      <Input {...register("email", validationRules.email)} label="이메일" error={formErros.email?.message} />
+      <Input
+        {...register("name", validationRules.name)}
+        label="이름"
+        error={formErros.name?.message}
+      />
+      <Input
+        {...register("email", validationRules.email)}
+        label="이메일"
+        error={formErros.email?.message}
+      />
       <Input
         {...register("password", validationRules.password)}
         type="password"
@@ -29,7 +44,9 @@ function SignupPage() {
           회원가입
         </button>
       </div>
-      {!!error && <span className=" text-sm/6 font-medium text-red">{error}</span>}
+      {!!error && (
+        <span className=" text-sm/6 font-medium text-red">{error}</span>
+      )}
     </AuthForm>
   );
 }

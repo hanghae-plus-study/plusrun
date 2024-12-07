@@ -25,7 +25,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "src/*": ["src/*"] // src를 명시적으로 매핑
     }
   },
   "include": ["src/**/*", "src/types/**/*.d.ts"],

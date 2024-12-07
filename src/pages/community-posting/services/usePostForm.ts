@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthError } from "@supabase/supabase-js";
-import { CategoryType } from "@/src/types/posts";
+import { CategoryType } from "src/types/posts";
 
 type PostFormInputs = {
   title: string;
