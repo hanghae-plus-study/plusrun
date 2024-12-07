@@ -54,7 +54,6 @@ const useLoginForm = () => {
         setServerError(error.message);
       }
       const user = data.user;
-      console.log("User metadata:", data.user?.user_metadata?.first_name);
 
       if (user) {
         const { data: userInfo, error: userInfoError } =

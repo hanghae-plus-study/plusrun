@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 import { CourseType } from "../types/course";
 import fetchCourses from "../services/fetchCourses";
 import { filterCourses, sortCourses } from "../services/courseService";
+import { useSession } from "src/hooks/useSesstion";
 
 export const useCourse = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredCourses, setFilteredCourses] = useState<CourseType[]>([]);
   const [sortOption, setSortOption] = useState<"latest" | "popular" | "">("");
+
+  const { isLoggedIn } = useSession();
 
   const {
     data: courses = [],
@@ -16,6 +19,7 @@ export const useCourse = () => {
   } = useQuery<CourseType[]>({
     queryKey: ["courses"],
     queryFn: fetchCourses,
+    enabled: isLoggedIn,
   });
 
   useEffect(() => {
