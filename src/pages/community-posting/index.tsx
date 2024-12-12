@@ -8,7 +8,7 @@ function CommunitPositngPage() {
   const navigation = useNavigate();
   const { handleSubmit, register, onSubmit, formError, validationRules, error } = usePostForm();
   return (
-    <div className=" grid justify-items-stretch mt-10 mx-auto  w-3/6">
+    <div className=" grid justify-items-stretch mt-20 mx-auto w-3/6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-12">
           <div>

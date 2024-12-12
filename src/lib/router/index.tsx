@@ -12,6 +12,7 @@ import {
 } from "./lazyPages";
 import ROUTE_PATH from "./routPath";
 import { Suspense } from "react";
+import CommunityPostDetailPage from "src/pages/community-post";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: "/course", element: <CoursePage /> },
       { path: "/courses/:id", element: <CourseDetailPage /> },
       { path: ROUTE_PATH.COMMUNITY, element: <CommunityPage /> },
+      { path: "/community/:id", element: <CommunityPostDetailPage /> },
       { path: ROUTE_PATH.COMMUNITY_POSTING, element: <CommunityPostingPage /> },
     ],
   },
