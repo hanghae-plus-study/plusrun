@@ -3,13 +3,19 @@ import { Post } from "src/types/posts";
 import React from "react";
 import { formatDate } from "src/lib/dateUtils";
 import Chips from "src/components/chips/Chips";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   post: Post;
 }
 function PostItem({ post }: Props) {
+  const navigation = useNavigate();
   return (
-    <li key={post.id} className="flex justify-between gap-x-6 py-5 cursor-default">
+    <li
+      onClick={() => navigation(`/community/${post.id}`)}
+      key={post.id}
+      className="flex justify-between gap-x-6 py-5 cursor-pointer"
+    >
       <div className="flex min-w-0 gap-x-4 ">
         <div className="flex flex-col items-start gap-4">
           <Chips>{POST_CATEGORY_TYPE[post.category].name}</Chips>

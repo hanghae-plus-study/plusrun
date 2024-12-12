@@ -56,8 +56,7 @@ const useLoginForm = () => {
       const user = data.user;
 
       if (user) {
-        const { data: userInfo, error: userInfoError } =
-          await supabase.auth.getUser();
+        const { data: userInfo, error: userInfoError } = await supabase.auth.getUser();
 
         if (userInfoError || !userInfo.user) {
           throw new Error("사용자 정보를 가져오는 데 실패했습니다.");
