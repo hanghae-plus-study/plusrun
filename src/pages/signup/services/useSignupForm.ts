@@ -49,7 +49,8 @@ const useSignupForm = () => {
     },
     confirmPassword: {
       required: "비밀번호 확인을 입력해주세요.",
-      validate: (value: string) => value === passwordValue || "비밀번호가 일치하지 않습니다.",
+      validate: (value: string) =>
+        value === passwordValue || "비밀번호가 일치하지 않습니다.",
     },
     name: {
       required: "이름을 입력해주세요.",
@@ -69,7 +70,6 @@ const useSignupForm = () => {
           },
         },
       });
-
       if (error) {
         setServerError(error?.message);
       }

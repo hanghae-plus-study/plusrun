@@ -1,39 +1,22 @@
-import { useQuery } from "@tanstack/react-query";
-import supabase from "../../lib/supabase";
-import { CourseType } from "./types/course";
-import { CourseCard } from "./Components/CourseCard";
-import fetchCourses from "./services/fetchCourses";
+import { CourseCard } from "../../components/CourseCard";
 import { Link } from "react-router-dom";
+import { useCourse } from "./services/useCourse";
 
 const CoursePage: React.FC = () => {
   const {
-    data: courses = [],
-    error,
+    searchTerm,
+    filteredCourses,
+    sortOption,
     isLoading,
-    refetch,
-  } = useQuery<CourseType[]>({
-    queryKey: ["courses"],
-    queryFn: fetchCourses,
-  });
+    error,
+    handleSearchChange,
+    handleSortChange,
+    applyFilter,
+  } = useCourse();
 
-  const handleCreateRecord = async () => {
-    const title = prompt("Enter the title:");
-    const body = prompt("Enter the body:");
-
-    if (!title || !body) {
-      alert("Title and body are required.");
-      return;
-    }
-
-    try {
-      const { error } = await supabase.from("course").insert([{ title, body }]);
-      if (error) {
-        throw error;
-      }
-      refetch(); // Refresh the data
-    } catch (err) {
-      console.error(err);
-      alert("Error creating record: " + (err as Error).message);
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      applyFilter();
     }
   };
 
@@ -41,23 +24,40 @@ const CoursePage: React.FC = () => {
   if (error) return <p className="text-red-500">Error: {error.message}</p>;
 
   return (
-    <div>
-      <h1>Course</h1>
-      <button
-        onClick={handleCreateRecord}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-      >
-        Add Course
-      </button>
+    <div className="p-4">
+      <h1>Courses</h1>
+      <div className="flex items-center justify-between my-4 ">
+        <input
+          type="text"
+          placeholder="강의명 검색"
+          value={searchTerm}
+          onChange={(e) => handleSearchChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+          className="w-4/5 border rounded p-2"
+        />
+        <select
+          value={sortOption}
+          onChange={(e) =>
+            handleSortChange(e.target.value as "latest" | "popular" | "")
+          }
+          className="border rounded p-2"
+        >
+          <option value="">정렬 순서</option>
+          <option value="latest">최신순</option>
+          <option value="popular">인기순</option>
+        </select>
+      </div>
+
       <div id="history" className="mt-4">
-        {Array.isArray(courses) && courses.length > 0 ? (
+        {filteredCourses.length > 0 ? (
           <div className="grid grid-cols-5 gap-x-4 gap-y-6">
-            {courses.map((course: CourseType) => (
+            {filteredCourses.map((course) => (
               <Link
+                key={course.id}
                 to={`/courses/${course.id}`}
-                className="p-4 border rounded shadow-sm hover:shadow-lg"
+                className="rounded shadow-sm hover:shadow-lg"
               >
-                <CourseCard key={course.id} course={course} />
+                <CourseCard course={course} />
               </Link>
             ))}
           </div>
